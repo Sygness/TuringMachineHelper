@@ -31,4 +31,8 @@ public class Controlekaart {
         }
         return false;
     }
+
+    public int getKaartID() {
+        return kaartID;
+    }
 }

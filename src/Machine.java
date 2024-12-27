@@ -14,7 +14,14 @@ public class Machine {
     private ArrayList<Ponskaart> ponskaartData;
     private ArrayList<KaartCode> controlekaartLijst;
     private ArrayList<Controlekaart> controlekaartData;
+    private int kaartA = 0;
+    private int kaartB = 0;
+    private int kaartC = 0;
+    private int kaartD = 0;
+    private int kaartE = 0;
+    private int kaartF = 0;
 
+    // alleen nodig icm int kaartID opzoeklijst en berekenID method
     private int kaartlijst[] = new int[380]; // array om kaartID mee op te zoeken. Niet de meest handige methode, maar wilde eens wat anders proberen dan objecten in ArrayList
 
     public Machine() {
@@ -141,7 +148,7 @@ public class Machine {
 
     }
 
-    public int getKaartID(int kaartnummer) {
+    private int getKaartID(int kaartnummer) {
 
         for (int i = 0; i < kaartlijst.length; i++) {
             if (kaartlijst[i] == kaartnummer) {
@@ -172,7 +179,99 @@ public class Machine {
         System.out.println("Gekozen combinatie is ongeldig.");
         return 0; // misschien gebruiken voor looping ipv exit
 
-    } // verplaatsen naar Spel?
+    }
+
+    /**
+     * Kaarten instellen voor spel. Geef kleurnummer, ID wordt opgeslagen. Maximaal 6 (A-F)
+     * @param kaartnummer
+     */
+    public void setKaartA(int kaartnummer) {
+        kaartA = getKaartID(kaartnummer);
+    }
+    public void setKaartB(int kaartnummer) {
+        kaartB = getKaartID(kaartnummer);
+    }
+    public void setKaartC(int kaartnummer) {
+        kaartC = getKaartID(kaartnummer);
+    }
+    public void setKaartD(int kaartnummer) {
+        kaartD = getKaartID(kaartnummer);
+    }
+    public void setKaartE(int kaartnummer) {
+        kaartE = getKaartID(kaartnummer);
+    }
+    public void setKaartF(int kaartnummer) {
+        kaartF = getKaartID(kaartnummer);
+    }
+
+    public int controleerKaartIDs(String kaartletter){
+        switch (kaartletter) {
+            case "A":
+                return kaartA;
+            case "B":
+                return kaartB;
+            case "C":
+                return kaartC;
+            case "D":
+                return kaartD;
+            case "E":
+                return kaartE;
+            case "F":
+                return kaartF;
+            default:
+                System.out.println(kaartletter + " bestaat niet. Kies een letter van A-F.");
+                System.out.println("Kies welk criterium je wilt controleren, A-F.");
+                return 100; // als kaart niet is ingesteld, is uitkomst 0. Als letter fout is, is uitkomst 100.
+        }
+    }
+
+    public boolean testCriterium(int combinatie, String verifyLetter) {
+        // 1. haal positie op voor testcombinatie
+        int positie = getAntwoordVak(combinatie);
+        // 2. Nagaan welk criterium getest wordt en koppelen aan ID van controlekaart
+        int controlekaartID;
+
+        switch (verifyLetter) {
+            case "A":
+                controlekaartID = kaartA;
+                break;
+            case "B":
+                controlekaartID = kaartB;
+                break;
+            case "C":
+                controlekaartID = kaartC;
+                break;
+            case "D":
+                controlekaartID = kaartD;
+                break;
+            case "E":
+                controlekaartID = kaartE;
+                break;
+            case "F":
+                controlekaartID = kaartF;
+                break;
+            default:
+                System.out.println(verifyLetter + " is geen geldig criterium.");
+                System.out.println("Kies welk criterium je wilt controleren, A-F.");
+                controlekaartID = 100; // dit valt buiten de set van 95 kaarten en is dus ongeldig
+                return false;
+        }
+        if (controlekaartID == 0) { // Startwaarde van kaartvariabelen in deze klasse. Dus niet gekozen of in gebruik
+            System.out.println("Deze controlekaart is niet in gebruik.");
+            return false;
+        }
+
+        // 3. kaart ID en positie gebruiken om op te zoeken of controlekaart true of false geeft
+        for (Controlekaart c : controlekaartData) {
+            if (c.getKaartID() == controlekaartID) {
+                return c.checkCriterium(positie);
+            }
+        }
+
+        System.out.println("Controlekaart niet gevonden, er gaat ergens iets mis.");
+        return false; // placeholder, zou niet voor moeten komen
+
+    }
 
 
 
