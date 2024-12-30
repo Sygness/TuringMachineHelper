@@ -7,17 +7,19 @@ DONE:
 - spel klasse toegevoegd die ronden en tests telt
 - testcombinatie-positie koppelen aan positie op controlekaart, check true/false
 - Spel starten door controlekaarten te kiezen
+- ronde tellen
+- optie ronde/spel afbreken
 
-TODO basic: 
-- ronden tellen
-- voortijdig ronde afbreken optie
-- Als concept werkt, true posities voor de andere 91 controlekaarten toevoegen...
-- uniform overal Nederlands gebruiken
-- inputcontrole verbeteren
+TODO basic:
+- true posities voor de andere 91 controlekaarten toevoegen
+- kleurnummers verwijderen uit controlekaarten
+- beter differentiëren wat de diverse bronbestanden doen, zijn ze allemaal nodig?
 - opschonen onnodige klassen/methoden en private maken wat niet public hoeft te zijn
 
 TODO fancy:
 - GUI
+- criteriumkaarten
+- spring versie
 
 
 Beschrijving:

@@ -102,7 +102,7 @@ public class Machine {
 
     }
 
-    private ArrayList<Controlekaart> getControlekaartData(){    // alleen laden voor gebruikte kaarten
+    private ArrayList<Controlekaart> getControlekaartData(){
 
         Scanner inputStream = null;
         controlekaartData = new ArrayList<>();
@@ -177,8 +177,7 @@ public class Machine {
             }
         }
         System.out.println("Gekozen combinatie is ongeldig.");
-        return 0; // misschien gebruiken voor looping ipv exit
-
+        return 0;
     }
 
     /**
@@ -272,7 +271,5 @@ public class Machine {
         return false; // placeholder, zou niet voor moeten komen
 
     }
-
-
 
 }
