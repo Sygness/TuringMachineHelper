@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 /**
  * De zwarte doos, de machine die luistert naar je vraag en antwoord geeft, goed of fout.
- * Zoekt voor een gegeven getalkaart het bijbehorende controlevak op.
- *
- * Later toevoegen: controlekaarten, zodat controlevak aan een antwoord gekoppeld kan worden.
+ * Leest eerst voor elke combinatie het bijbehorende antwoordvak in, en een lijst van controlekaarten
+ * met hun posities die een groen vinkje geven (true).
+ * Zoekt voor een gegeven getalcombinatie het bijbehorende controlevak op.
+ * Zoekt met het antwoordvak in de gekozen controlekaart. Als controlevak voorkomt in de ArrayList voor die
+ * kaart geeft klasse "true" terug. Komt het vak niet voor, is het antwoord "false".
  */
 public class Machine {
 
@@ -21,16 +23,23 @@ public class Machine {
     private int kaartE = 0;
     private int kaartF = 0;
 
-    // alleen nodig icm int kaartID opzoeklijst en berekenID method
-    private int kaartlijst[] = new int[380]; // array om kaartID mee op te zoeken. Niet de meest handige methode, maar wilde eens wat anders proberen dan objecten in ArrayList
+    // array om kaartID mee op te zoeken. Niet de meest handige methode, maar wilde eens wat anders proberen dan objecten in ArrayList
+    // alleen nodig icm int kaartID opzoeklijst kaartlijst.txt en berekenID method
+    private int kaartlijst[] = new int[380];
 
     public Machine() {
         // inlezen ponskaart gegevens
         ponskaartData = getPonskaartData();
 
         // inlezen lijst om kaarten op te zoeken
-        controlekaartLijst = getControlekaartLijst();
         kaartlijst = getKaartlijst();
+
+        /**
+         * Alternatieve versie voor kaartID informatie opslaan/opvragen.
+         * Gebruikt class KaartCode en bronbestand controlekaarttabel.txt.
+         * Nodig voor method getKaartID2. Niet in gebruik in deze versie (5-jan-2025)
+         */
+        controlekaartLijst = getControlekaartLijst();
 
         // inlezen kaartdata
         controlekaartData = getControlekaartData();
@@ -66,10 +75,10 @@ public class Machine {
 
         try
         {
-            inputStream = new Scanner(new FileInputStream("src/resources/ControlekaartTabel.txt"));
+            inputStream = new Scanner(new FileInputStream("src/resources/controlekaarttabel.txt"));
         }
         catch (FileNotFoundException e) {
-            System.out.println("Bestand ControlekaartTabel.txt niet gevonden");
+            System.out.println("Bestand controlekaarttabel.txt niet gevonden");
             System.out.println("of niet kunnen openen.");
             System.exit(0);
         }
@@ -122,30 +131,32 @@ public class Machine {
             String regel = inputStream.nextLine();
             Scanner inputRegel = new Scanner(regel);
 
-            // argumenten controlekaart: int ID, array kleurcodes, array trueposities
+            // argumenten controlekaart: int ID, array trueposities
             int idnr = inputRegel.nextInt();
 
-
-            ArrayList<Integer> kleurcodes = new ArrayList<>();
             ArrayList<Integer> trueposities = new ArrayList<>();
-
-            kleurcodes.add(inputRegel.nextInt()); //groen
-            kleurcodes.add(inputRegel.nextInt()); //geel
-            kleurcodes.add(inputRegel.nextInt()); //blauw
-            kleurcodes.add(inputRegel.nextInt()); //paars
 
             // variabel aantal true posities per kaart, rest van regel
             while (inputRegel.hasNextInt()) {
                 trueposities.add(inputRegel.nextInt());
             }
 
-            Controlekaart kaart = new Controlekaart(idnr, kleurcodes, trueposities);
+            Controlekaart kaart = new Controlekaart(idnr, trueposities);
             controlekaartData.add(kaart);
 
         }
         inputStream.close();
         return controlekaartData;
 
+    }
+
+    private int getKaartID2(int kaartnummer) {
+        for (KaartCode k : controlekaartLijst) {
+            if (k.getKleurNummer() == kaartnummer) {
+                return k.getKaartID();
+            }
+        }
+        return 0; // dit betekent dat kaart niet gevonden is
     }
 
     private int getKaartID(int kaartnummer) {
@@ -269,7 +280,5 @@ public class Machine {
 
         System.out.println("Controlekaart niet gevonden, er gaat ergens iets mis.");
         return false; // placeholder, zou niet voor moeten komen
-
     }
-
 }

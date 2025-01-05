@@ -1,36 +1,38 @@
-# TuringMachineHelper
-DECEMBER 2024
-DONE:
-- ponskaartgegevens compleet, kan per combinatie uitvragen welke positie ze bevragen
-- tabel met controlekaartnummers gemaakt en gekoppeld aan 95 unieke ID's. Elk ID heeft 4 nummers (de 4 kleuren)
-- test set van 4 controlekaarten gevuld met alle controleposities die true geven (groen vinkje)
-- spel klasse toegevoegd die ronden en tests telt
-- testcombinatie-positie koppelen aan positie op controlekaart, check true/false
-- Spel starten door controlekaarten te kiezen
-- ronde tellen
-- optie ronde/spel afbreken
+# Unofficial Turing Machine Helper app
 
-TODO basic:
-- true posities voor de andere 91 controlekaarten toevoegen
-- kleurnummers verwijderen uit controlekaarten
-- beter differentiëren wat de diverse bronbestanden doen, zijn ze allemaal nodig?
-- opschonen onnodige klassen/methoden en private maken wat niet public hoeft te zijn
+*Turing Machine is een bordspel voor 1 tot 4 spelers, ontworpen door Fabien Gridel en Yoann Levet.
+In Nederland uitgegeven door Scorpion Masqué.*
 
-TODO fancy:
-- GUI
-- criteriumkaarten
-- spring versie
-
-
-Beschrijving:
-
-Speel een snel potje Turing Machine. 
-
-Turing Machine is een bordspel voor 1 tot 4 spelers, ontworpen door Fabien Gridel en Yoann Levet.
-
-De applicatie maakt het mogelijk voor een gegeven ponskaartcombinatie en verificatiekaart
-te achterhalen of de uitkomst true of false is.
-Om het spel volledig te spelen heb je nog steeds de criteriumkaarten nodig.
-Koop het spel, het is leuk!
+Deze applicatie laat je snel een solo-spel opzetten en spelen.
+Vervangt de ponskaarten en controlekaarten, maar niet de criteriumkaarten.
 
 Meer informatie en codes om te kraken op https://turingmachine.info/.
+
+## Functies
+
+- Spel instellen door 4 tot 6 controlekaarten te kiezen.
+(Kleur opgeven is niet nodig, elk kaartnummer is uniek.)
+- Test een combinatie op een specifieke controlekaart en geeft true (groen vinkje) of false (rood kruisje) terug.
+- Telling van ronden en tests.
+- Uitdagingen en controle van oplossingen via https://turingmachine.info/.
+
+## Beperkingen
+
+- Enkel Nederlandstalig.
+- Alleen te spelen in combinatie met de fysieke criteriumkaarten. (Koop het spel!)
+- Geen GUI. Applicatie draait in de IDE (Java). Invoer en uitvoer in console.
+
+## Ontwikkeling
+
+Ontwikkeld om bezig te zijn met Java. Bonus dat ik nu een spelletje TM kan spelen op de bank.
+Sommige inconsistenties in de code zijn bewust, om verschillende oplossingen uit te proberen.
+Functioneel af in december 2024. Begin januari 2025 de volledige controlekaartset toegevoegd.
+
+**Mogelijke verdere ontwikkelpunten**
+- GUI
+- Loskoppelen van IDE
+
+## Feedback
+
+Hoor het graag als je een fout vindt in controlekaarten.txt of ponskaarten.txt.
+Beginner-vriendelijke tips om de code te verbeteren zijn ook welkom.

@@ -1,24 +1,21 @@
 import java.util.ArrayList;
 
 /**
- * Klasse bevat de informatie van de controlekaarten, ID en posities die true geven.
- * Op dit moment bevast deze klasse nog expliciet de kleurgegevens, en wordt aangemaakt op basis van
- * het bestand controlekaarten.txt. Het kleurdeel is overbodig en wordt niet gebruikt.
- * Later er nog uit halen, maar bestand bewaren als data overzicht.
+ * Klasse bevat de informatie van een controlekaart:
+ * ID en posities die true geven.
+ * (Posities op de "hoeken" van de kaart worden niet gebruikt door het spel. Die zijn daarom
+ * niet opgenomen in het bestand met brongegevens voor de kaarten (controlekaarten.txt),
+ * en worden dus ook niet ingelezen in de objecten van deze klasse.)
  */
-
-//TODO kaartnummers array verwijderen. Zijn niet nodig.
 
 public class Controlekaart {
 
     private int kaartID;
-    private ArrayList<Integer> kleurnummers;
     private ArrayList<Integer> truePosities;
 
-    public Controlekaart(int kaartID, ArrayList<Integer> kleuren, ArrayList<Integer> posities) {
-        // ID, kleurnrs Array, en truePositiesArray aanmaken
+    public Controlekaart(int kaartID, ArrayList<Integer> posities) {
+        // ID en truePositiesArray aanmaken
         this.kaartID = kaartID;
-        this.kleurnummers = kleuren;
         this.truePosities = posities;
     }
 
